@@ -25,6 +25,9 @@ class Router {
         } else {
             echo 'Page not found';
         }
+    }
 
+    public function render($view) {
+        include __DIR__ . "/views/$view.php";
     }
 }
