@@ -34,7 +34,7 @@ class Router {
             $$key = $value;
         }
 
-        ob_start(); // Almacenamiento en memeoria durante un momento...
+        ob_start(); // Almacenamiento en memoria durante un momento...
         include __DIR__ . "/views/$view.php";
         $contenido = ob_get_clean(); // Limpia el Buffer
         include __DIR__ . "/views/layout.php";
