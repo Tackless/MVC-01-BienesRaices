@@ -16,20 +16,20 @@ if (!isset($inicio)) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bienes Raices</title>
-    <link rel="stylesheet" href="../build/css/app.css">
+    <link rel="stylesheet" href="/public/build/css/app.css">
 </head>
 <body>
     <header class="header <?php echo ($inicio) ? 'inicio' : '' ?> ">
         <div class="contenedor contenido-header">
             <div class="barra">
                 <a href="/">
-                    <img height="50" src="../build/img/logo.svg" alt="Logo de Bienes Raices">
+                    <img height="50" src="/public/build/img/logo.svg" alt="Logo de Bienes Raices">
                 </a>
                 <div class="mobile-menu">
-                    <img src="../build/img/barras.svg" alt="Icono menu resposively">
+                    <img src="/public/build/img/barras.svg" alt="Icono menu resposively">
                 </div>
                 <div class="derecha">
-                    <img src="../build/img/dark-mode.svg" alt="icono dark-mode" class="dark-mode-boton">
+                    <img src="/public/build/img/dark-mode.svg" alt="icono dark-mode" class="dark-mode-boton">
                     <nav class="navegacion">
                         <a href="nosotros.php">Nosotros</a>
                         <a href="anuncios.php">Anuncios</a>
@@ -58,6 +58,6 @@ if (!isset($inicio)) {
         </div>
         <p class="copyright">Todos los derechos reservados Donovan Eliosa <?php echo date('Y'); ?> &copy;</p>
     </footer>
-    <script src="../build/js/bundle.min.js"></script>
+    <script src="/public/build/js/bundle.min.js"></script>
 </body>
 </html>

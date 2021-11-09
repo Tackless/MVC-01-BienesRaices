@@ -9,8 +9,8 @@
     }
     ?>
         
-    <a href="/admin/propiedades/crear.php" class="boton-verde">Nueva Propiedad</a>
-    <a href="/admin/vendedores/crear.php" class="boton-amarillo">Nuevo(a) Vendedor(a)</a>
+    <a href="propiedades/crear" class="boton-verde">Nueva Propiedad</a>
+    <a href="/admin/vendedores/crear" class="boton-amarillo">Nuevo(a) Vendedor(a)</a>
     <h2>Propiedades</h2>
     <table class="propiedades">
         <thead>
@@ -28,7 +28,7 @@
                 <tr>
                     <td> <?php echo $propiedad->id; ?> </td>
                     <td> <?php echo $propiedad->titulo; ?> </td>
-                    <td> <img src="/imagenes/<?php echo $propiedad->imagen; ?>" class="imagen-tabla" alt=""></td>
+                    <td> <img src="/public/imagenes/<?php echo $propiedad->imagen; ?>" class="imagen-tabla" alt=""></td>
                     <td> $ <?php echo number_format($propiedad->precio); ?> </td>
                     <td>
                         <form method="POST" class="w-100" action="">
