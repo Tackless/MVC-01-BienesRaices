@@ -1,5 +1,5 @@
 <main class="contenedor seccion">
-    <h1>Registrar Propiedades </h1>
+    <h1>Actualizar Registro de Propiedad </h1>
     <?php foreach ($errores as $error): ?>
         <div class="alerta error">
             <?php echo $error; ?>
@@ -8,6 +8,6 @@
     <a href="/admin" class="boton-verde">Volver</a>
     <form class="formulario" method="POST" enctype="multipart/form-data">
         <?php include __DIR__ . '/formulario.php'; ?>
-        <input type="submit" value="Crear Propiedad" class="boton-verde">
+        <input type="submit" value="Actualizar Propiedad" class="boton-verde">
     </form>
 </main>

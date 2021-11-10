@@ -69,7 +69,17 @@ class PropiedadController {
         ]);
     }
     
-    public static function actualizar() {
-        echo 'actualizar propiedad';
+    public static function actualizar(Router $router) {
+        $id = validarORedireccionar('admin');
+
+        $propiedad = Propiedad::find($id);
+        $errores = Propiedad::getErrores();
+        $vendedores = Vendedor::all();
+
+        $router->render('/propiedades/actualizar', [
+            'propiedad' => $propiedad,
+            'errores' => $errores,
+            'vendedores' => $vendedores
+        ]);
     }
 }
