@@ -76,6 +76,40 @@ class PropiedadController {
         $errores = Propiedad::getErrores();
         $vendedores = Vendedor::all();
 
+        // Ejecutar código despúes de que el usuario manda el formulario
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            // Asignar los atributos
+            $args = $_POST['propiedad'];
+
+            // Sincroniza los atributos del formulario 
+            $propiedad->sincronizar($args);
+            
+            // Validación
+            $errores = $propiedad->validar();
+
+            /* SUBIDA DE ARCHIVOS */
+            // Generar un nombre único
+            $nombreImagen = md5( uniqid( rand(), true ) ) . ".jpg";
+            
+            // Setear la imagen
+            if ($_FILES['propiedad']['tmp_name']['imagen']) {
+                // Realiza un resize a la imagen con intervention
+                $image = Image::make($_FILES['propiedad']['tmp_name']['imagen'])->fit(800,600);
+                $propiedad->setImagen($nombreImagen);
+            }
+
+            // Revisar que el arreglo de errores esté vacío
+            if ( empty($errores) ) {
+                if ($_FILES['propiedad']['tmp_name']['imagen']) {
+                    // Almacenar la imagen
+                    $image->save(CARPETA_IMAGENES . $nombreImagen);
+                }
+
+                $resultado = $propiedad->guardar();
+            }
+        }
+
         $router->render('/propiedades/actualizar', [
             'propiedad' => $propiedad,
             'errores' => $errores,
