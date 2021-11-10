@@ -42,15 +42,18 @@ class PaginasController {
     }
     
     public static function blog(Router $router) {
-        debuguear('Desde blog');
+        
+        $router->render('paginas/blog',[]);
     }
     
     public static function entrada(Router $router) {
-        debuguear('Desde entrada');
+        
+        $router->render('paginas/entrada', []);
     }
     
     public static function contacto(Router $router) {
-        debuguear('Desde contacto');
+        
+        $router->render('paginas/contacto', []);
     }
     
 }
