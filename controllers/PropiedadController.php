@@ -4,13 +4,15 @@ namespace Controllers;
 use MVC\Router;
 use Model\Propiedad;
 use Model\Vendedor;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class PropiedadController {
 
     public static function index(Router $router) {
 
         $propiedades = Propiedad::all();
-        $resultado = null;
+        // Muestra mensaje condicional
+        $resultado = $_GET['resultado'] ?? null;
         
         $router->render('propiedades/admin', [
             'propiedades' => $propiedades,
@@ -23,13 +25,47 @@ class PropiedadController {
         $propiedad = new Propiedad;
         $vendedores = Vendedor::all();
 
+        // Arreglo con mensajes de errores
+        $errores = Propiedad::getErrores();
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            debuguear($_POST);
+            // Crea una nueva instancia
+            $propiedad = new Propiedad($_POST['propiedad']);
+
+            /* SUBIDA DE ARCHIVOS */
+            // Generar un nombre único
+            $nombreImagen = md5( uniqid( rand(), true ) ) . ".jpg";
+
+            // Setear la imagen
+            if ($_FILES['propiedad']['tmp_name']['imagen']) {
+                // Realiza un resize a la imagen con intervention
+                $image = Image::make($_FILES['propiedad']['tmp_name']['imagen'])->fit(800,600);
+                $propiedad->setImagen($nombreImagen);
+            }
+            
+            // Validar
+            $errores = $propiedad->validar();
+            
+            // Revisar que el arreglo de errores esté vacío
+            if ( empty($errores) ) {
+
+                // Crear la carpeta para subir imagenes
+                if (!is_dir(CARPETA_IMAGENES)) {
+                    mkdir(CARPETA_IMAGENES);
+                }
+
+                // Guardar la imagen en el servidor
+                $image->save(CARPETA_IMAGENES . $nombreImagen);
+
+                // Guardar en la base de datos
+                $resultado = $propiedad->guardar();
+            }
         }
 
         $router->render('propiedades/crear', [
             'propiedad' => $propiedad,
-            'vendedores' => $vendedores
+            'vendedores' => $vendedores,
+            'errores' => $errores
         ]);
     }
     

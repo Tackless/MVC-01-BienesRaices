@@ -28,7 +28,7 @@
                 <tr>
                     <td> <?php echo $propiedad->id; ?> </td>
                     <td> <?php echo $propiedad->titulo; ?> </td>
-                    <td> <img src="/public/imagenes/<?php echo $propiedad->imagen; ?>" class="imagen-tabla" alt=""></td>
+                    <td> <img src="/imagenes/<?php echo $propiedad->imagen; ?>" class="imagen-tabla" alt=""></td>
                     <td> $ <?php echo number_format($propiedad->precio); ?> </td>
                     <td>
                         <form method="POST" class="w-100" action="">
