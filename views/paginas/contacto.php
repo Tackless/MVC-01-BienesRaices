@@ -18,24 +18,24 @@
             <legend>Información Personal</legend>
 
             <label for="nombre">Nombre</label>
-            <input type="text" placeholder="Tu Nombre" id="nombre" name="contacto[nombre]" >
+            <input type="text" placeholder="Tu Nombre" id="nombre" name="contacto[nombre]" required>
             
             <label for="mensaje">Mensaje</label>
-            <textarea id="mensaje" cols="30" rows="10" name="contacto[mensaje]" ></textarea>
+            <textarea id="mensaje" cols="30" rows="10" name="contacto[mensaje]" required></textarea>
         </fieldset>
 
         <fieldset>
             <legend>Información sobre la propiedad</legend>
 
             <label for="opciones">Vende o Compra</label>
-            <select id="opciones" name="contacto[tipo]" >
+            <select id="opciones" name="contacto[tipo]" required>
                 <option value="" disabled selected>-- Seleccione --</option>
                 <option value="compra">Compra</option>
                 <option value="venta">Venta</option>
             </select>
 
             <label for="presupuesto">Presupuesto</label>
-            <input type="number" min="0" placeholder="Tu Presupuesto" id="presupuesto" name="contacto[precio]" >
+            <input type="number" min="0" placeholder="Tu Presupuesto" id="presupuesto" name="contacto[precio]" required>
 
         </fieldset>
 
@@ -46,10 +46,10 @@
 
             <div class="forma-contacto">
                 <label for="contactar-telefono">Teléfono</label>
-                <input type="radio" value="telefono" id="contactar-telefono" name="contacto[contacto]" >
+                <input type="radio" value="telefono" id="contactar-telefono" name="contacto[contacto]" required>
                 
                 <label for="contactar-email">E-mail</label>
-                <input type="radio" value="email" id="contactar-email" name="contacto[contacto]" >
+                <input type="radio" value="email" id="contactar-email" name="contacto[contacto]" required>
             </div>
 
             <div id="contacto">
