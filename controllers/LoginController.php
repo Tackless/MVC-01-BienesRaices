@@ -26,9 +26,9 @@ class LoginController {
                     // Verificar el password
                     $autenticado = $auth->comprobarPassword($resultado);
                     
-                    // Autenticar al usuario
                     if ($autenticado) {
-
+                        // Autenticar al usuario
+                        $auth->autenticar();
                     } else {
                         // Password incorrecto
                         $errores = Admin::getErrores();
