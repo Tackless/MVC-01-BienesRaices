@@ -1,6 +1,6 @@
 <main class="contenedor seccion">
     <h1>Actualizar Registro Vendedor</h1>
-    <a href="/admin/index.php" class="boton-verde">Volver</a>
+    <a href="/admin" class="boton-verde">Volver</a>
     
     <?php foreach ($errores as $error): ?>
         <div class="alerta error">

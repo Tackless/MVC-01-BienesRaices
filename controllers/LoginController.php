@@ -45,6 +45,9 @@ class LoginController {
     }
 
     public static function logout() {
-        debuguear('desde logout');
+        session_start();
+        $_SESSION = [];
+
+        header('location: /');
     }
 }
