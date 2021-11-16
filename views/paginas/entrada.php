@@ -1,5 +1,5 @@
 <main class="contenedor seccion contenido-centrado">
-    <h1><?php echo utf8_encode($entrada->titulo);  ?></h1>
+    <h1><?php echo $entrada->titulo;  ?></h1>
 
     <img loading="lazy" src="/imagenes/<?php echo $entrada->imagen; ?>" alt="Imagen de la Propiedad">
     
@@ -8,6 +8,6 @@
     <div class="resumen-propiedad">
         
 
-        <p><?php echo utf8_encode($entrada->contenido); ?></p>
+        <p><?php echo $entrada->contenido; ?></p>
     </div>
 </main>
