@@ -24,12 +24,16 @@
     }
 }
 .texto-entrada {
+    display: flex;
+    flex-direction: column;
     a {
-        color: $negro;
-        margin-top: 2rem;
+        color: $blanco;
         display: block;
+        margin: 2rem 0;
         @include tablet {
+            align-self: flex-end;
             margin-top: 0;
+            max-width: 15rem;
         } 
     }
     h4 {
