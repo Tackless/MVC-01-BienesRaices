@@ -22,7 +22,31 @@ class Entrada extends ActiveRecord {
         $this->imagen = $args['imagen'] ?? '';
         $this->contenido = $args['contenido'] ?? '';
         $this->descripcion = $args['descripcion'] ?? '';
-        $this->fecha = $args['fecha'] ?? '';
+        $this->fecha = date('d/m/Y');
         $this->autor = $args['autor'] ?? '';
+    }
+
+    public function validar() {
+        if (!$this->titulo) {
+            self::$errores[] = "Debes añadir un titulo";
+        }
+        
+        if (!$this->autor) {
+            self::$errores[] = "Ingresa el Autor";
+        }
+
+        if ( strlen($this->descripcion) < 20 ) {
+            self::$errores[] = "La descripcion es obligatoria y debe tener al menos 20 caracteres";
+        }
+        
+        if ( strlen($this->contenido) < 50 ) {
+            self::$errores[] = "El contenido es obligatorio y debe tener al menos 50 caracteres";
+        }
+    
+        if (!$this->imagen) {
+            self::$errores[] = 'La imagén de la propiedad es obligatoria';
+        }
+
+        return self::$errores;
     }
 }

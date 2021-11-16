@@ -1,55 +1,37 @@
 <?php 
 
 namespace Controllers;
+
 use MVC\Router;
-use Model\Propiedad;
-use Model\Vendedor;
-use Intervention\Image\ImageManagerStatic as Image;
 use Model\Entrada;
+use Intervention\Image\ImageManagerStatic as Image;
 
-class PropiedadController {
 
-    public static function index(Router $router) {
-
-        $propiedades = Propiedad::all();
-        $vendedores = Vendedor::all();
-        $entradas = Entrada::all();
-        // Muestra mensaje condicional
-        $resultado = $_GET['resultado'] ?? null;
-        
-        $router->render('propiedades/admin', [
-            'propiedades' => $propiedades,
-            'resultado' => $resultado,
-            'vendedores' => $vendedores,
-            'entradas' => $entradas
-        ]);
-    }
+class EntradaController {
 
     public static function crear(Router $router) {
-
-        $propiedad = new Propiedad;
-        $vendedores = Vendedor::all();
-
-        // Arreglo con mensajes de errores
-        $errores = Propiedad::getErrores();
+        
+        $entrada = new Entrada;
+        
+        $errores = Entrada::getErrores();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Crea una nueva instancia
-            $propiedad = new Propiedad($_POST['propiedad']);
+            $entrada = new Entrada($_POST['entrada']);
 
             /* SUBIDA DE ARCHIVOS */
             // Generar un nombre único
             $nombreImagen = md5( uniqid( rand(), true ) ) . ".jpg";
 
             // Setear la imagen
-            if ($_FILES['propiedad']['tmp_name']['imagen']) {
+            if ($_FILES['entrada']['tmp_name']['imagen']) {
                 // Realiza un resize a la imagen con intervention
-                $image = Image::make($_FILES['propiedad']['tmp_name']['imagen'])->fit(800,600);
-                $propiedad->setImagen($nombreImagen);
+                $image = Image::make($_FILES['entrada']['tmp_name']['imagen'])->fit(800,600);
+                $entrada->setImagen($nombreImagen);
             }
             
             // Validar
-            $errores = $propiedad->validar();
+            $errores = $entrada->validar();
             
             // Revisar que el arreglo de errores esté vacío
             if ( empty($errores) ) {
@@ -63,77 +45,75 @@ class PropiedadController {
                 $image->save(CARPETA_IMAGENES . $nombreImagen);
 
                 // Guardar en la base de datos
-                $resultado = $propiedad->guardar();
+                $resultado = $entrada->guardar();
             }
         }
 
-        $router->render('propiedades/crear', [
-            'propiedad' => $propiedad,
-            'vendedores' => $vendedores,
-            'errores' => $errores
+        $router->render('entradas/crear', [
+            'errores' => $errores,
+            'entrada' => $entrada
         ]);
     }
     
     public static function actualizar(Router $router) {
         $id = validarORedireccionar('admin');
 
-        $propiedad = Propiedad::find($id);
-        $errores = Propiedad::getErrores();
-        $vendedores = Vendedor::all();
+        $entrada = Entrada::find($id);
+        
+        $errores = Entrada::getErrores();
 
         // Ejecutar código despúes de que el usuario manda el formulario
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Asignar los atributos
-            $args = $_POST['propiedad'];
+            $args = $_POST['entrada'];
 
             // Sincroniza los atributos del formulario 
-            $propiedad->sincronizar($args);
+            $entrada->sincronizar($args);
             
             // Validación
-            $errores = $propiedad->validar();
+            $errores = $entrada->validar();
 
             /* SUBIDA DE ARCHIVOS */
             // Generar un nombre único
             $nombreImagen = md5( uniqid( rand(), true ) ) . ".jpg";
             
             // Setear la imagen
-            if ($_FILES['propiedad']['tmp_name']['imagen']) {
+            if ($_FILES['entrada']['tmp_name']['imagen']) {
                 // Realiza un resize a la imagen con intervention
-                $image = Image::make($_FILES['propiedad']['tmp_name']['imagen'])->fit(800,600);
-                $propiedad->setImagen($nombreImagen);
+                $image = Image::make($_FILES['entrada']['tmp_name']['imagen'])->fit(800,600);
+                $entrada->setImagen($nombreImagen);
             }
 
             // Revisar que el arreglo de errores esté vacío
             if ( empty($errores) ) {
-                if ($_FILES['propiedad']['tmp_name']['imagen']) {
+                if ($_FILES['entrada']['tmp_name']['imagen']) {
                     // Almacenar la imagen
                     $image->save(CARPETA_IMAGENES . $nombreImagen);
                 }
 
-                $resultado = $propiedad->guardar();
+                $resultado = $entrada->guardar();
             }
         }
-
-        $router->render('/propiedades/actualizar', [
-            'propiedad' => $propiedad,
+        
+        $router->render('entradas/actualizar', [
             'errores' => $errores,
-            'vendedores' => $vendedores
+            'entrada' => $entrada
         ]);
     }
-
+    
     public static function eliminar() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
+            
             // Validar id
             $id = $_POST['id'];
             $id = filter_var($id, FILTER_VALIDATE_INT);
-        
+            
             if ($id) {
                 $tipo = $_POST['tipo'];
                 if (validarTipoContenido($tipo)) {
-                    $propiedad = Propiedad::find($id);
-                    $propiedad->eliminar();
+                    $entrada = Entrada::find($id);
+                    $entrada->eliminar();
                 } 
             }
         }
