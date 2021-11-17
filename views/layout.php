@@ -15,8 +15,10 @@ if (!isset($inicio)) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bienes Raices</title>
+    <meta name="description" content="Proyect with MVC">
+    <link rel="shortcut icon" href="/public/build/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/build/css/app.css">
+    <title>Bienes Raices</title>
 </head>
 <body>
     <header class="header <?php echo ($inicio) ? 'inicio' : '' ?> ">
@@ -35,9 +37,11 @@ if (!isset($inicio)) {
                         <a href="/propiedades">Propiedades</a>
                         <a href="/blog">Blog</a>
                         <a href="/contacto">Contacto</a>
-                        <?php if ($auth) : ?>
+                        <?php if ($auth) { ?>
                             <a href="/logout">Cerrar Sesión</a>
-                        <?php endif; ?>
+                        <?php } else { ?>
+                            <a href="/login">Iniciar Sesión</a>
+                        <?php }; ?>
                     </nav>    
                 </div>
             </div>

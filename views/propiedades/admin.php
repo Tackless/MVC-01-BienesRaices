@@ -11,6 +11,7 @@
         
     <a href="/propiedades/crear" class="boton-verde">Nueva Propiedad</a>
     <a href="/vendedores/crear" class="boton-amarillo">Nuevo(a) Vendedor(a)</a>
+    <a href="/entradas/crear" class="boton-verde">Nueva Entrada</a>
     <h2>Propiedades</h2>
     <table class="propiedades">
         <thead>
@@ -27,8 +28,8 @@
             <?php foreach( $propiedades as $propiedad ): ?>
                 <tr>
                     <td> <?php echo $propiedad->id; ?> </td>
-                    <td> <?php echo $propiedad->titulo; ?> </td>
-                    <td> <img src="/imagenes/<?php echo $propiedad->imagen; ?>" class="imagen-tabla" alt=""></td>
+                    <td> <?php echo utf8_encode($propiedad->titulo); ?> </td>
+                    <td> <img src="/imagenes/<?php echo $propiedad->imagen; ?>" class="imagen-tabla" alt="imagen propiedad"></td>
                     <td> $ <?php echo number_format($propiedad->precio); ?> </td>
                     <td>
                         <form method="POST" class="w-100" action="/propiedades/eliminar">
@@ -67,6 +68,40 @@
                             <input type="submit" class="boton-rojo-block" value="Eliminar">
                         </form>
                         <a href="/vendedores/actualizar?id=<?php echo $vendedor->id; ?>" class="boton-amarillo-block">Actualizar</a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+
+    <h2>Entradas</h2>
+    <table class="propiedades">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Imagen</th>
+                <th>Autor</th>
+                <th>Creacion</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        
+        <tbody> <!-- Mostrar los resultados de la Base de Datos -->
+            <?php foreach( $entradas as $entrada ): ?>
+                <tr>
+                    <td> <?php echo $entrada->id; ?> </td>
+                    <td> <?php echo $entrada->titulo; ?> </td>
+                    <td> <img src="/imagenes/<?php echo $entrada->imagen; ?>" class="imagen-tabla" alt="imagen propiedad"></td>
+                    <td> <?php echo $entrada->autor; ?> </td>
+                    <td> <?php echo $entrada->fecha; ?> </td>
+                    <td>
+                        <form method="POST" class="w-100" action="/entradas/eliminar">
+                            <input type="hidden" name="id" value="<?php echo $entrada->id; ?>">
+                            <input type="hidden" name="tipo" value="entrada">
+                            <input type="submit" class="boton-rojo-block" value="Eliminar">
+                        </form>
+                        <a href="/entradas/actualizar?id=<?php echo $entrada->id; ?>" class="boton-amarillo-block">Actualizar</a>
                     </td>
                 </tr>
             <?php endforeach; ?>
