@@ -60,7 +60,7 @@ if (!isset($inicio)) {
                 <a href="/contacto">Contacto</a>
             </nav>
         </div>
-        <p data-cy="copyright" class="copyright">Todos los derechos reservados Donovan Eliosa <?php echo date('Y'); ?> &copy;</p>
+        <p data-cy="copyright" class="copyright">Todos los derechos reservados <a href="https://github.com/Tackless">Donovan Eliosa</a> <?php echo date('Y'); ?> &copy;</p>
     </footer>
     <script src="/build/js/bundle.min.js"></script>
 </body>
